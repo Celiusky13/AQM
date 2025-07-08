@@ -73,7 +73,7 @@ sudo chown -R $USER:$USER /var/www/aqm
 
 # Clonar el repositorio
 cd /var/www/aqm
-git clone https://github.com/tu-usuario/AQM-main.git .
+git clone https://github.com/Celiusky13/AQM-main.git 
 ```
 
 ### 8. Instalar Dependencias
