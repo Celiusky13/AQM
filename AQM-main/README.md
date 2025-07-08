@@ -133,6 +133,43 @@ npm run preview
 
 ---
 
+## 🌐 **Despliegue en Producción**
+
+### **Servidor Ubuntu (IP: 187.33.159.68)**
+
+Para desplegar esta aplicación en tu servidor Ubuntu, sigue la guía completa de despliegue:
+
+📖 **[Ver Guía Completa de Despliegue](./DEPLOYMENT.md)**
+
+### **Resumen rápido de despliegue:**
+
+```bash
+# 1. Conectar al servidor
+ssh root@187.33.159.68
+
+# 2. Instalar dependencias del sistema
+sudo apt update && sudo apt upgrade -y
+sudo apt install nginx git nodejs npm -y
+
+# 3. Clonar y configurar la aplicación
+git clone https://github.com/tu-usuario/AQM-main.git /var/www/aqm
+cd /var/www/aqm
+npm install
+npm run build
+
+# 4. Configurar Nginx y desplegar
+sudo cp deployment/nginx.conf /etc/nginx/sites-available/aqm
+sudo ln -s /etc/nginx/sites-available/aqm /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+```
+
+### **URLs de acceso:**
+- **Producción**: http://187.33.159.68
+- **Con dominio**: http://tu-dominio.com (después de configurar DNS)
+- **SSL**: https://tu-dominio.com (después de configurar certificado)
+
+---
+
 ## 🏗️ **Estructura del Proyecto**
 
 ```
