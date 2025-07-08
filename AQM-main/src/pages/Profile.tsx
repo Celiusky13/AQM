@@ -8,7 +8,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Camera, Instagram, User } from 'lucide-react';
+import { Camera, Instagram, User, X, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import type { Database } from '@/integrations/supabase/types';
 
 type IdentityTag = Database['public']['Enums']['identity_tag'];
@@ -31,6 +32,7 @@ const identityOptions: IdentityTag[] = [
 const Profile = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<any>(null);
 
@@ -184,6 +186,27 @@ const Profile = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-2xl">
         <div className="bg-white rounded-2xl shadow-lg p-8">
+          {/* Header con botón de cerrar */}
+          <div className="flex items-center justify-between mb-6">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Volver al inicio
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/')}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
+
           <div className="text-center mb-8">
             <Avatar className="w-24 h-24 mx-auto mb-4">
               <AvatarImage src={profile?.avatar_url} />
@@ -315,13 +338,25 @@ const Profile = () => {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full bg-pride-gradient text-white" 
-                disabled={loading}
-              >
-                {loading ? 'Guardando...' : 'Actualizar Perfil'}
-              </Button>
+              <div className="flex gap-4">
+                <Button 
+                  type="submit" 
+                  className="flex-1 bg-pride-gradient text-white" 
+                  disabled={loading}
+                >
+                  {loading ? 'Guardando...' : 'Actualizar Perfil'}
+                </Button>
+                
+                <Button 
+                  type="button" 
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => navigate('/')}
+                  disabled={loading}
+                >
+                  Cancelar
+                </Button>
+              </div>
             </form>
           </Form>
         </div>
