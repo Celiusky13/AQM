@@ -3,6 +3,7 @@ import React from 'react';
 import { Heart, Instagram, Twitter, Mail } from 'lucide-react';
 import Logo from './Logo';
 
+// Footer con tema blanco - fondo blanco y texto negro
 const Footer = () => {
   return (
     <footer className="bg-white text-black py-12 border-t border-gray-200">
